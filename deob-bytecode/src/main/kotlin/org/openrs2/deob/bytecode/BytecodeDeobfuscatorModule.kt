@@ -39,8 +39,6 @@ import org.openrs2.deob.bytecode.transform.UnusedMethodTransformer
 import org.openrs2.deob.bytecode.transform.VisibilityTransformer
 import org.openrs2.deob.util.DeobfuscatorUtilModule
 import org.openrs2.patcher.PatcherModule
-import java.nio.file.Files
-import java.nio.file.Paths
 
 public object BytecodeDeobfuscatorModule : AbstractModule() {
     override fun configure() {
@@ -80,7 +78,7 @@ public object BytecodeDeobfuscatorModule : AbstractModule() {
         binder.addBinding().to(RedundantGotoTransformer::class.java)
         binder.addBinding().to(RemapTransformer::class.java)
         binder.addBinding().to(ResetTransformer::class.java)
-        binder.addBinding().to(ResourceTransformer::class.java)
+        binder.addBinding().to(StringDecryptionTransformer::class.java)
         binder.addBinding().to(UnusedArgTransformer::class.java)
         binder.addBinding().to(UnusedLocalTransformer::class.java)
         binder.addBinding().to(UnusedMethodTransformer::class.java)

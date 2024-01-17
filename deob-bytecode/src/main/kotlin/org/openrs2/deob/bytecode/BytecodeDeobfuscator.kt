@@ -23,6 +23,10 @@ public class BytecodeDeobfuscator @Inject constructor(
 
     public fun run(input: Path, output: Path) {
         // read list of enabled transformers and their order from the profile
+        val preTransformers = profile.preTransformers.map { name ->
+            allTransformersByName[name] ?: throw IllegalArgumentException("Unknown transformer $name")
+        }
+
         val transformers = profile.transformers.map { name ->
             allTransformersByName[name] ?: throw IllegalArgumentException("Unknown transformer $name")
         }
@@ -143,6 +147,17 @@ public class BytecodeDeobfuscator @Inject constructor(
 
         // deobfuscate
         logger.info { "Transforming" }
+        for (transformer in preTransformers) {
+            logger.info { "Running pre-remap transformer ${transformer.javaClass.simpleName}" }
+            transformer.transform(classPath)
+        }
+
+        logger.info { "Remapping libraries" }
+        allTransformersByName["Remap"]!!.transform(classPath)
+
+        logger.info { "Patching libraries" }
+        allTransformersByName["Patcher"]!!.transform(classPath)
+
         for (transformer in transformers) {
             logger.info { "Running transformer ${transformer.javaClass.simpleName}" }
             transformer.transform(classPath)

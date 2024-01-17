@@ -12,7 +12,10 @@ public class Profile(
     public val entryPoints: GlobMemberFilter,
     public val scrambledLibraries: Set<String>,
     public val maxObfuscatedNameLen: Int,
-    public val transformers: List<String>
+    public val preTransformers: List<String>,
+    public val transformers: List<String>,
+    public val patches: List<String>,
+    public val sourceTransformers: List<String>
 ) {
     public class LibraryProfile(
         public val format: String?,

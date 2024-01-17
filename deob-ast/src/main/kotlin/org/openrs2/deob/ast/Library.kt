@@ -66,19 +66,19 @@ public class Library(
         public fun parse(module: Module): Library {
             logger.info { "Parsing root ${module.sources}" }
 
-            val extraSolvers: MutableList<TypeSolver> = mutableListOf()
-            if (Files.exists(Paths.get("share", "deob", "jars.dependencies.list"))) {
-                // would be nice to read this from yaml, unfortunately profile.yaml is not available here
-                val files = Files.readAllLines(Paths.get("share", "deob", "jars.dependencies.list"))
-
-                for (file in files) {
-                    if (file.isEmpty()) {
-                        continue
-                    }
-
-                    extraSolvers += JarTypeSolver(file)
-                }
-            }
+            val extraSolvers: MutableList<TypeSolver> = mutableListOf(JarTypeSolver("nonfree/lib/stub.jar"))
+            // if (Files.exists(Paths.get("share", "deob", "jars.dependencies.list"))) {
+            //     // would be nice to read this from yaml, unfortunately profile.yaml is not available here
+            //     val files = Files.readAllLines(Paths.get("share", "deob", "jars.dependencies.list"))
+            //
+            //     for (file in files) {
+            //         if (file.isEmpty()) {
+            //             continue
+            //         }
+            //
+            //         extraSolvers += JarTypeSolver(file)
+            //     }
+            // }
 
             val solver = CombinedTypeSolver(
                 ClassLoaderTypeSolver(ClassLoader.getPlatformClassLoader()),

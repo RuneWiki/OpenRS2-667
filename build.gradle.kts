@@ -357,49 +357,10 @@ project(":nonfree:client") {
     tasks.named<JavaExec>("run") {
         args("1", "live", "en", "game0")
     }
-
-    plugins.withType<JavaPlugin> {
-        dependencies {
-            val implementation by configurations
-            implementation(project(":nonfree:gl"))
-            implementation(project(":nonfree:signlink"))
-        }
-    }
-}
-
-project(":nonfree:gl") {
-    apply(plugin = "java-library")
 }
 
 project(":nonfree:loader") {
     apply(plugin = "java")
-
-    plugins.withType<JavaPlugin> {
-        dependencies {
-            val implementation by configurations
-            implementation(project(":nonfree:signlink"))
-            implementation(project(":nonfree:unpack"))
-        }
-    }
-}
-
-project(":nonfree:signlink") {
-    apply(plugin = "java-library")
-}
-
-project(":nonfree:unpack") {
-    apply(plugin = "java-library")
-}
-
-project(":nonfree:unpackclass") {
-    apply(plugin = "java-library")
-
-    plugins.withType<JavaPlugin> {
-        dependencies {
-            val implementation by configurations
-            implementation(project(":nonfree:unpack"))
-        }
-    }
 }
 
 fun commitHash(): String {

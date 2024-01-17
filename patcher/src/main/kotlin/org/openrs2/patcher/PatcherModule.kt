@@ -31,37 +31,20 @@ public object PatcherModule : AbstractModule() {
         install(CryptoModule)
 
         val binder = Multibinder.newSetBinder(binder(), Transformer::class.java, PatcherQualifier::class.java)
-
-        if (Files.notExists(Paths.get("share", "deob", "patcher.transformers.list"))) {
-            println("No patcher transformers")
-            return
-        }
-
-        // would be nice to read this from yaml, unfortunately profile.yaml is not available until the module runs
-        val transformers = Files.readAllLines(Paths.get("share/deob/patcher.transformers.list"))
-        for (transformer in transformers) {
-            if (transformer.isEmpty()) {
-                continue
-            }
-
-            binder.addBinding().to(when (transformer) {
-                "BufferSize" -> BufferSizeTransformer::class.java
-                "CachePath" -> CachePathTransformer::class.java
-                "HostCheck" -> HostCheckTransformer::class.java
-                "Domain" -> DomainTransformer::class.java
-                "LoadLibrary" -> LoadLibraryTransformer::class.java
-                "MacResize" -> MacResizeTransformer::class.java
-                "MemoryAllocation" -> MemoryAllocationTransformer::class.java
-                "Name" -> NameTransformer::class.java
-                "PlatformDetection" -> PlatformDetectionTransformer::class.java
-                "PublicKey" -> PublicKeyTransformer::class.java
-                "RightClick" -> RightClickTransformer::class.java
-                "Typo" -> TypoTransformer::class.java
-                "HighDpi" -> HighDpiTransformer::class.java
-                "InvalidKey" -> InvalidKeyTransformer::class.java
-                "Resource" -> ResourceTransformer::class.java
-                else -> throw IllegalArgumentException("Unknown patcher transformer: $transformer")
-            })
-        }
+        binder.addBinding().to(BufferSizeTransformer::class.java)
+        binder.addBinding().to(CachePathTransformer::class.java)
+        binder.addBinding().to(DomainTransformer::class.java)
+        binder.addBinding().to(HighDpiTransformer::class.java)
+        binder.addBinding().to(HostCheckTransformer::class.java)
+        binder.addBinding().to(InvalidKeyTransformer::class.java)
+        binder.addBinding().to(LoadLibraryTransformer::class.java)
+        binder.addBinding().to(MacResizeTransformer::class.java)
+        binder.addBinding().to(MemoryAllocationTransformer::class.java)
+        binder.addBinding().to(NameTransformer::class.java)
+        binder.addBinding().to(PlatformDetectionTransformer::class.java)
+        binder.addBinding().to(PublicKeyTransformer::class.java)
+        binder.addBinding().to(ResourceTransformer::class.java)
+        binder.addBinding().to(RightClickTransformer::class.java)
+        binder.addBinding().to(TypoTransformer::class.java)
     }
 }

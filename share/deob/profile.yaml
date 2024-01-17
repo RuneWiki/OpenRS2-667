@@ -2,76 +2,96 @@
 libraries:
   client:
     format: pack200
-    file: runescape_gl.pack200
-    requires:
-      - gl
-      - signlink
-  gl:
-    format: pack200
-    file: jaggl.pack200
+    file: runescape.pack200
   loader:
     format: jar
-    file: loader_gl.jar
-    requires:
-      - signlink
-      - unpack
-  unpackclass:
+    file: loader.jar
+dependencies:
+  stub:
     format: jar
-    file: unpackclass.pack
-    requires:
-      - unpack
-  signlink:
-    signed_move:
-      - loader
-      - client
-  unpack:
-    move:
-      - "loader!unpack"
+    file: stub.jar
 excluded_classes:
   - "*!client"
-  - "*!com/sun/opengl/impl/x11/**"
-  - "*!jagex3/jagmisc/jagmisc"
+  - "*!dxVertexLayout"
+  - "*!com/ms/**"
+  - "*!jaclib/**"
+  - "*!jagdx/**"
+  - "*!jagex3/**"
   - "*!jaggl/**"
-  - "*!javax/media/opengl/**"
+  - "*!jagtheora/**"
   - "*!loader"
   - "*!unpack"
-  - "*!unpackclass"
 excluded_methods:
   - "*!**.<clinit> *"
   - "*!**.<init> *"
   - "*!**.main *"
-  - "*!**.providesignlink *"
   - "*!**.quit *"
-  - "*!com/sun/opengl/impl/x11/**.* *"
+  - "*!com/ms/**.* *"
+  - "*!jaclib/**.* *"
+  - "*!jagdx/**.* *"
+  - "*!jagex3/**.* *"
   - "*!jaggl/**.* *"
-  - "*!javax/media/opengl/**.* *"
+  - "*!jagtheora/**.* *"
+  - "*!**.unpack *"
+  - "*!**.enter *"
+  - "*!**.listmodes *"
+  - "*!**.exit *"
+  - "*!**.provideLoaderApplet *"
+  - "*!**.createToolkit *"
+  - "*!**.showcursor *"
+  - "*!**.movemouse *"
+  - "*!**.setcustomcursor *"
+  - "*!**.httpProxyConnect *"
+  - "*!**.callback *"
+  - "*!**.callbackEnumModes *"
 excluded_fields:
-  - "*!**.cache *"
-  - "*!**.canvasScale *"
-  - "*!com/sun/opengl/impl/x11/**.* *"
+  - "*!com/ms/**.* *"
+  - "*!jaclib/**.* *"
+  - "*!jagdx/**.* *"
+  - "*!jagex3/**.* *"
   - "*!jaggl/**.* *"
-  - "*!javax/media/opengl/**.* *"
+  - "*!jagtheora/**.* *"
+  - "*!**.nativeid *"
+  - "*!**.peer *"
+  - "*!**.cache *"
+  - "*!**.width *"
+  - "*!**.height *"
+  - "*!**.xOffset *"
+  - "*!**.yMiddle *"
+  - "*!**.xMiddle *"
+  - "*!**.offsetPerTenCycles *"
+  - "*!**.boxXOffset *"
+  - "*!**.textYOffset *"
+  - "*!**.boxWidth *"
+  - "*!**.boxYOffset *"
+  - "*!**.yOffset *"
+  - "*!**.left *"
+  - "*!**.colourtext *"
+  - "*!**.right *"
+  - "*!**.bodyRight *"
+  - "*!**.canvas *"
+  - "*!**.barBuf *"
+  - "*!**.bottom *"
+  - "*!**.bodyFill *"
+  - "*!**.bodyLeft *"
+  - "*!**.background *"
 entry_points:
   - "*!**.<clinit> *"
   - "*!**.main *"
-  - "*!**.providesignlink *"
   - "*!client.<init> *"
-  - "*!com/sun/opengl/impl/x11/DRIHack.begin *"
-  - "*!com/sun/opengl/impl/x11/DRIHack.end *"
   - "*!loader.<init> *"
-  - "*!unpackclass.<init> *"
 scrambled_libraries:
   - client
-max_obfuscated_name_len: 2
-transformers:
+max_obfuscated_name_len: 3
+pre_transformers:
   - OriginalPcSave
   - OriginalName
+  - StringDecryption
   - ClassLiteral
   - InvokeSpecial
   - MultipleAssignment
-  - Remap
-  - Patcher
-  - Resource
+  - RedundantGoto
+transformers:
   - OpaquePredicate
   - ExceptionObfuscation
   - ExceptionTracing
@@ -97,3 +117,39 @@ transformers:
   - RedundantGoto
   - OriginalPcRestore
   - FernflowerException
+patches:
+  - BufferSize
+  - CachePath
+  - HostCheck
+  - Domain
+  - LoadLibrary
+  - MacResize
+  - MemoryAllocation
+  - Name
+  - PlatformDetection
+  - PublicKey
+  - RightClick
+  - Typo
+  - HighDpi
+  - InvalidKey
+  - Resource
+source_transformers:
+  - Unenclose
+  - NegativeLiteral
+  - Complement
+  - Not
+  - CharLiteral
+  - IfElse
+  - Ternary
+  - BinaryExprOrder
+  - AddSub
+  - Identity
+  - BitMask
+  - HexLiteral
+  - ValueOf
+  - NewInstance
+  - Increment
+  - ForLoopCondition
+  - RedundantCast
+  - Gl
+  - Enclose
