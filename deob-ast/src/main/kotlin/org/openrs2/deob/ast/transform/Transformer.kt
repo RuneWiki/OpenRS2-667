@@ -5,6 +5,8 @@ import org.openrs2.deob.ast.Library
 import org.openrs2.deob.ast.LibraryGroup
 
 public abstract class Transformer {
+    public val name: String = javaClass.simpleName.removeSuffix("Transformer")
+
     public fun transform(group: LibraryGroup) {
         preTransform(group)
 

@@ -19,6 +19,7 @@ dependencies {
     implementation(libs.guava)
     implementation(libs.javaParser)
     implementation(libs.jdom)
+    implementation(project(mapOf("path" to ":deob-bytecode")))
 }
 
 publishing {

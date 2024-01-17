@@ -25,11 +25,18 @@ import org.openrs2.deob.ast.transform.TernaryTransformer
 import org.openrs2.deob.ast.transform.Transformer
 import org.openrs2.deob.ast.transform.UnencloseTransformer
 import org.openrs2.deob.ast.transform.ValueOfTransformer
+import org.openrs2.deob.bytecode.DeobfuscatorQualifier
+import org.openrs2.deob.bytecode.Profile
+import org.openrs2.deob.bytecode.ProfileProvider
 import java.nio.file.Files
 import java.nio.file.Paths
 
 public object AstDeobfuscatorModule : AbstractModule() {
     override fun configure() {
+        bind(Profile::class.java)
+            .toProvider(ProfileProvider::class.java)
+            .`in`(Scopes.SINGLETON)
+
         bind(GlRegistry::class.java)
             .toProvider(GlRegistryProvider::class.java)
             .`in`(Scopes.SINGLETON)
