@@ -13,7 +13,6 @@ dependencies:
 excluded_classes:
   - "*!client"
   - "*!dxVertexLayout"
-  - "*!com/ms/**"
   - "*!jaclib/**"
   - "*!jagdx/**"
   - "*!jagex3/**"
@@ -26,7 +25,6 @@ excluded_methods:
   - "*!**.<init> *"
   - "*!**.main *"
   - "*!**.quit *"
-  - "*!com/ms/**.* *"
   - "*!jaclib/**.* *"
   - "*!jagdx/**.* *"
   - "*!jagex3/**.* *"
@@ -45,7 +43,6 @@ excluded_methods:
   - "*!**.callback *"
   - "*!**.callbackEnumModes *"
 excluded_fields:
-  - "*!com/ms/**.* *"
   - "*!jaclib/**.* *"
   - "*!jagdx/**.* *"
   - "*!jagex3/**.* *"
@@ -53,28 +50,33 @@ excluded_fields:
   - "*!jagtheora/**.* *"
   - "*!**.nativeid *"
   - "*!**.peer *"
-  - "*!**.cache *"
+  - "*!**.bar *"
+  - "*!**.background *"
+  - "*!**.left *"
+  - "*!**.right *"
+  - "*!**.top *"
+  - "*!**.bottom *"
+  - "*!**.bodyLeft *"
+  - "*!**.bodyRight *"
+  - "*!**.bodyFill *"
+  - "*!**.bf *"
+  - "*!**.bfm *"
+  - "*!**.colourtext *"
+  - "*!**.lb *"
+  - "*!**.xMiddle *"
+  - "*!**.yMiddle *"
+  - "*!**.xOffset *"
+  - "*!**.yOffset *"
   - "*!**.width *"
   - "*!**.height *"
-  - "*!**.xOffset *"
-  - "*!**.yMiddle *"
-  - "*!**.xMiddle *"
-  - "*!**.offsetPerTenCycles *"
   - "*!**.boxXOffset *"
-  - "*!**.textYOffset *"
-  - "*!**.boxWidth *"
   - "*!**.boxYOffset *"
-  - "*!**.yOffset *"
-  - "*!**.left *"
-  - "*!**.colourtext *"
-  - "*!**.right *"
-  - "*!**.bodyRight *"
+  - "*!**.boxWidth *"
+  - "*!**.textYOffset *"
+  - "*!**.offsetPerTenCycles *"
   - "*!**.canvas *"
   - "*!**.barBuf *"
-  - "*!**.bottom *"
-  - "*!**.bodyFill *"
-  - "*!**.bodyLeft *"
-  - "*!**.background *"
+  - "*!**.cache *"
 entry_points:
   - "*!**.<clinit> *"
   - "*!**.main *"
@@ -117,22 +119,7 @@ transformers:
   - RedundantGoto
   - OriginalPcRestore
   - FernflowerException
-patches:
-  - BufferSize
-  - CachePath
-  - HostCheck
-  - Domain
-  - LoadLibrary
-  - MacResize
-  - MemoryAllocation
-  - Name
-  - PlatformDetection
-  - PublicKey
-  - RightClick
-  - Typo
-  - HighDpi
-  - InvalidKey
-  - Resource
+patches: []
 source_transformers:
   - Unenclose
   - NegativeLiteral
