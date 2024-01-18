@@ -42,6 +42,20 @@ excluded_methods:
   - "*!**.httpProxyConnect *"
   - "*!**.callback *"
   - "*!**.callbackEnumModes *"
+  - "client!a.* *"
+  - "client!b.* *"
+  - "client!h.* *"
+  - "client!i.* *"
+  - "client!j.* *"
+  - "client!ja.* *"
+  - "client!n.* *"
+  - "client!na.* *"
+  - "client!oa.* *"
+  - "client!p.* *"
+  - "client!t.* *"
+  - "client!wa.* *"
+  - "client!xa.* *"
+  - "client!ya.* *"
 excluded_fields:
   - "*!jaclib/**.* *"
   - "*!jagdx/**.* *"
@@ -105,7 +119,6 @@ transformers:
   - ConstantArg
   - CopyPropagation
   - UnusedLocal
-  - UnusedMethod
   - UnusedArg
   - Counter
   - Reset
@@ -137,6 +150,5 @@ source_transformers:
   - NewInstance
   - Increment
   - ForLoopCondition
-  - RedundantCast
   - Gl
   - Enclose
