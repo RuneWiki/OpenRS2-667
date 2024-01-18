@@ -1,6 +1,7 @@
 package org.openrs2.patcher
 
 import com.google.inject.AbstractModule
+import com.google.inject.Scopes
 import com.google.inject.multibindings.Multibinder
 import org.openrs2.asm.AsmModule
 import org.openrs2.asm.transform.Transformer
@@ -31,20 +32,20 @@ public object PatcherModule : AbstractModule() {
         install(CryptoModule)
 
         val binder = Multibinder.newSetBinder(binder(), Transformer::class.java, PatcherQualifier::class.java)
-        binder.addBinding().to(BufferSizeTransformer::class.java)
-        binder.addBinding().to(CachePathTransformer::class.java)
-        binder.addBinding().to(DomainTransformer::class.java)
-        binder.addBinding().to(HighDpiTransformer::class.java)
-        binder.addBinding().to(HostCheckTransformer::class.java)
-        binder.addBinding().to(InvalidKeyTransformer::class.java)
-        binder.addBinding().to(LoadLibraryTransformer::class.java)
-        binder.addBinding().to(MacResizeTransformer::class.java)
-        binder.addBinding().to(MemoryAllocationTransformer::class.java)
-        binder.addBinding().to(NameTransformer::class.java)
-        binder.addBinding().to(PlatformDetectionTransformer::class.java)
-        binder.addBinding().to(PublicKeyTransformer::class.java)
-        binder.addBinding().to(ResourceTransformer::class.java)
-        binder.addBinding().to(RightClickTransformer::class.java)
-        binder.addBinding().to(TypoTransformer::class.java)
+        // binder.addBinding().to(BufferSizeTransformer::class.java)
+        // binder.addBinding().to(CachePathTransformer::class.java)
+        // binder.addBinding().to(DomainTransformer::class.java)
+        // binder.addBinding().to(HighDpiTransformer::class.java)
+        // binder.addBinding().to(HostCheckTransformer::class.java)
+        // binder.addBinding().to(InvalidKeyTransformer::class.java)
+        // binder.addBinding().to(LoadLibraryTransformer::class.java)
+        // binder.addBinding().to(MacResizeTransformer::class.java)
+        // binder.addBinding().to(MemoryAllocationTransformer::class.java)
+        // binder.addBinding().to(NameTransformer::class.java)
+        // binder.addBinding().to(PlatformDetectionTransformer::class.java)
+        // binder.addBinding().to(PublicKeyTransformer::class.java)
+        // binder.addBinding().to(ResourceTransformer::class.java)
+        // binder.addBinding().to(RightClickTransformer::class.java)
+        // binder.addBinding().to(TypoTransformer::class.java)
     }
 }
