@@ -41,7 +41,7 @@ public class GlTransformer @Inject constructor(private val registry: GlRegistry)
 
     override fun preTransform(group: LibraryGroup) {
         enums.clear()
-        glUnit = group["gl"]?.get(GL_CLASS)
+        glUnit = group["client"]?.get(GL_CLASS)
     }
 
     override fun transformUnit(group: LibraryGroup, library: Library, unit: CompilationUnit) {
@@ -114,7 +114,11 @@ public class GlTransformer @Inject constructor(private val registry: GlRegistry)
             name = name.dropLast(1)
         }
 
-        val command = registry.commands[name] ?: error("Failed to find $name in the OpenGL registry")
+        val command = registry.commands[name]
+        if (command == null) {
+            println("Failed to find $name in the OpenGL registry")
+            return
+        }
 
         var registryIndex = 0
         var followedByOffset = false
@@ -132,6 +136,8 @@ public class GlTransformer @Inject constructor(private val registry: GlRegistry)
         }
 
         if (registryIndex != command.parameters.size) {
+            println("$name: $registryIndex != ${command.parameters.size}")
+            method.parameters.forEach { println(it.nameAsString) }
             error("Command parameters inconsistent with registry")
         }
     }
@@ -198,7 +204,11 @@ public class GlTransformer @Inject constructor(private val registry: GlRegistry)
 
     private fun transformArguments(unit: CompilationUnit, expr: MethodCallExpr) {
         val name = expr.nameAsString
-        val command = registry.commands[name] ?: error("Failed to find $name in the OpenGL registry")
+        val command = registry.commands[name]
+        if (command == null) {
+            println("Failed to find $name in the OpenGL registry")
+            return
+        }
 
         var registryIndex = 0
         var followedByOffset = false
@@ -218,6 +228,8 @@ public class GlTransformer @Inject constructor(private val registry: GlRegistry)
         }
 
         if (registryIndex != command.parameters.size) {
+            println("$name: $registryIndex != ${command.parameters.size}")
+            expr.arguments.forEach { println(it) }
             error("Command parameters inconsistent with registry")
         }
     }
@@ -320,9 +332,9 @@ public class GlTransformer @Inject constructor(private val registry: GlRegistry)
     private companion object {
         private val logger = InlineLogger()
         private const val GL_METHOD_PREFIX = "gl"
-        private const val GL_CLASS_UNQUALIFIED = "GL"
-        private const val GL_CLASS = "javax.media.opengl.$GL_CLASS_UNQUALIFIED"
-        private const val JAGGL_CLASS = "jaggl.opengl"
+        private const val GL_CLASS_UNQUALIFIED = "OpenGL"
+        private const val GL_CLASS = "jaggl.$GL_CLASS_UNQUALIFIED"
+        private const val JAGGL_CLASS = "jaggl.OpenGL"
         private val GL_CLASSES = setOf(GL_CLASS, JAGGL_CLASS)
         private val GL_FRAMEBUFFER_COMPLETE = GlEnum("GL_FRAMEBUFFER_COMPLETE", 0x8CD5)
 

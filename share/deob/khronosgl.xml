@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <registry>
     <comment>
 Copyright (c) 2013-2019 The Khronos Group Inc.
@@ -15975,28 +15975,6 @@ typedef unsigned int GLhandleARB;
             <glx type="render" opcode="322" name="glDrawPixelsPBO" comment="PBO protocol"/>
         </command>
         <command>
-            <!-- jagex binding -->
-            <proto>void <name>glDrawPixelsi</name></proto>
-            <param><ptype>GLsizei</ptype> <name>width</name></param>
-            <param><ptype>GLsizei</ptype> <name>height</name></param>
-            <param group="PixelFormat"><ptype>GLenum</ptype> <name>format</name></param>
-            <param group="PixelType"><ptype>GLenum</ptype> <name>type</name></param>
-            <param len="COMPSIZE(format,type,width,height)">const <ptype>GLint</ptype> *<name>pixels</name></param>
-            <glx type="render" opcode="173"/>
-            <glx type="render" opcode="322" name="glDrawPixelsPBO" comment="PBO protocol"/>
-        </command>
-        <command>
-            <!-- jagex binding -->
-            <proto>void <name>glDrawPixelsub</name></proto>
-            <param><ptype>GLsizei</ptype> <name>width</name></param>
-            <param><ptype>GLsizei</ptype> <name>height</name></param>
-            <param group="PixelFormat"><ptype>GLenum</ptype> <name>format</name></param>
-            <param group="PixelType"><ptype>GLenum</ptype> <name>type</name></param>
-            <param len="COMPSIZE(format,type,width,height)">const <ptype>GLbyte</ptype> *<name>pixels</name></param>
-            <glx type="render" opcode="173"/>
-            <glx type="render" opcode="322" name="glDrawPixelsPBO" comment="PBO protocol"/>
-        </command>
-        <command>
             <proto>void <name>glDrawRangeElementArrayAPPLE</name></proto>
             <param group="PrimitiveType"><ptype>GLenum</ptype> <name>mode</name></param>
             <param><ptype>GLuint</ptype> <name>start</name></param>
@@ -19929,28 +19907,6 @@ typedef unsigned int GLhandleARB;
             <param group="PixelFormat"><ptype>GLenum</ptype> <name>format</name></param>
             <param group="PixelType"><ptype>GLenum</ptype> <name>type</name></param>
             <param len="COMPSIZE(target,level,format,type)">void *<name>pixels</name></param>
-            <glx type="single" opcode="135"/>
-            <glx type="render" opcode="344" name="glGetTexImagePBO" comment="PBO protocol"/>
-        </command>
-        <command>
-            <!-- jagex binding -->
-            <proto>void <name>glGetTexImagei</name></proto>
-            <param group="TextureTarget"><ptype>GLenum</ptype> <name>target</name></param>
-            <param group="CheckedInt32"><ptype>GLint</ptype> <name>level</name></param>
-            <param group="PixelFormat"><ptype>GLenum</ptype> <name>format</name></param>
-            <param group="PixelType"><ptype>GLenum</ptype> <name>type</name></param>
-            <param len="COMPSIZE(target,level,format,type)"><ptype>GLint</ptype> *<name>pixels</name></param>
-            <glx type="single" opcode="135"/>
-            <glx type="render" opcode="344" name="glGetTexImagePBO" comment="PBO protocol"/>
-        </command>
-        <command>
-            <!-- jagex binding -->
-            <proto>void <name>glGetTexImageub</name></proto>
-            <param group="TextureTarget"><ptype>GLenum</ptype> <name>target</name></param>
-            <param group="CheckedInt32"><ptype>GLint</ptype> <name>level</name></param>
-            <param group="PixelFormat"><ptype>GLenum</ptype> <name>format</name></param>
-            <param group="PixelType"><ptype>GLenum</ptype> <name>type</name></param>
-            <param len="COMPSIZE(target,level,format,type)"><ptype>GLbyte</ptype> *<name>pixels</name></param>
             <glx type="single" opcode="135"/>
             <glx type="render" opcode="344" name="glGetTexImagePBO" comment="PBO protocol"/>
         </command>
@@ -25412,10 +25368,10 @@ typedef unsigned int GLhandleARB;
         </command>
         <command>
             <proto>void <name>glProgramStringARB</name></proto>
-            <!-- jagex changed this to (target, format, string) -->
             <param group="ProgramTarget"><ptype>GLenum</ptype> <name>target</name></param>
             <param group="ProgramFormat"><ptype>GLenum</ptype> <name>format</name></param>
-            <param>const void *<name>string</name></param>
+            <param><ptype>GLsizei</ptype> <name>len</name></param>
+            <param len="len">const void *<name>string</name></param>
         </command>
         <command>
             <proto>void <name>glProgramSubroutineParametersuivNV</name></proto>
@@ -26796,32 +26752,6 @@ typedef unsigned int GLhandleARB;
             <glx type="render" opcode="345" name="glReadPixelsPBO" comment="PBO protocol"/>
         </command>
         <command>
-            <!-- jagex binding -->
-            <proto>void <name>glReadPixelsi</name></proto>
-            <param group="WinCoord"><ptype>GLint</ptype> <name>x</name></param>
-            <param group="WinCoord"><ptype>GLint</ptype> <name>y</name></param>
-            <param><ptype>GLsizei</ptype> <name>width</name></param>
-            <param><ptype>GLsizei</ptype> <name>height</name></param>
-            <param group="PixelFormat"><ptype>GLenum</ptype> <name>format</name></param>
-            <param group="PixelType"><ptype>GLenum</ptype> <name>type</name></param>
-            <param len="COMPSIZE(format,type,width,height)"><ptype>GLint</ptype> *<name>pixels</name></param>
-            <glx type="single" opcode="111"/>
-            <glx type="render" opcode="345" name="glReadPixelsPBO" comment="PBO protocol"/>
-        </command>
-        <command>
-            <!-- jagex binding -->
-            <proto>void <name>glReadPixelsub</name></proto>
-            <param group="WinCoord"><ptype>GLint</ptype> <name>x</name></param>
-            <param group="WinCoord"><ptype>GLint</ptype> <name>y</name></param>
-            <param><ptype>GLsizei</ptype> <name>width</name></param>
-            <param><ptype>GLsizei</ptype> <name>height</name></param>
-            <param group="PixelFormat"><ptype>GLenum</ptype> <name>format</name></param>
-            <param group="PixelType"><ptype>GLenum</ptype> <name>type</name></param>
-            <param len="COMPSIZE(format,type,width,height)"><ptype>GLbyte</ptype> *<name>pixels</name></param>
-            <glx type="single" opcode="111"/>
-            <glx type="render" opcode="345" name="glReadPixelsPBO" comment="PBO protocol"/>
-        </command>
-        <command>
             <proto>void <name>glReadnPixels</name></proto>
             <param><ptype>GLint</ptype> <name>x</name></param>
             <param><ptype>GLint</ptype> <name>y</name></param>
@@ -27915,9 +27845,10 @@ typedef unsigned int GLhandleARB;
         </command>
         <command>
             <proto>void <name>glShaderSourceARB</name></proto>
-            <!-- jagex changed this to (shaderObj, string) -->
             <param group="handleARB"><ptype>GLhandleARB</ptype> <name>shaderObj</name></param>
-            <param>const void *<name>string</name></param>
+            <param><ptype>GLsizei</ptype> <name>count</name></param>
+            <param len="count">const <ptype>GLcharARB</ptype> **<name>string</name></param>
+            <param len="count">const <ptype>GLint</ptype> *<name>length</name></param>
             <alias name="glShaderSource"/>
         </command>
         <command>
@@ -29014,20 +28945,6 @@ typedef unsigned int GLhandleARB;
             <glx type="render" opcode="328" name="glTexImage1DPBO" comment="PBO protocol"/>
         </command>
         <command>
-            <!-- jagex binding -->
-            <proto>void <name>glTexImage1Dub</name></proto>
-            <param group="TextureTarget"><ptype>GLenum</ptype> <name>target</name></param>
-            <param><ptype>GLint</ptype> <name>level</name></param>
-            <param group="InternalFormat"><ptype>GLint</ptype> <name>internalformat</name></param>
-            <param><ptype>GLsizei</ptype> <name>width</name></param>
-            <param><ptype>GLint</ptype> <name>border</name></param>
-            <param group="PixelFormat"><ptype>GLenum</ptype> <name>format</name></param>
-            <param group="PixelType"><ptype>GLenum</ptype> <name>type</name></param>
-            <param len="COMPSIZE(format,type,width)">const <ptype>GLbyte</ptype> *<name>pixels</name></param>
-            <glx type="render" opcode="109"/>
-            <glx type="render" opcode="328" name="glTexImage1DPBO" comment="PBO protocol"/>
-        </command>
-        <command>
             <proto>void <name>glTexImage2D</name></proto>
             <param group="TextureTarget"><ptype>GLenum</ptype> <name>target</name></param>
             <param><ptype>GLint</ptype> <name>level</name></param>
@@ -29038,51 +28955,6 @@ typedef unsigned int GLhandleARB;
             <param group="PixelFormat"><ptype>GLenum</ptype> <name>format</name></param>
             <param group="PixelType"><ptype>GLenum</ptype> <name>type</name></param>
             <param len="COMPSIZE(format,type,width,height)">const void *<name>pixels</name></param>
-            <glx type="render" opcode="110"/>
-            <glx type="render" opcode="329" name="glTexImage2DPBO" comment="PBO protocol"/>
-        </command>
-        <command>
-            <!-- jagex binding -->
-            <proto>void <name>glTexImage2Df</name></proto>
-            <param group="TextureTarget"><ptype>GLenum</ptype> <name>target</name></param>
-            <param><ptype>GLint</ptype> <name>level</name></param>
-            <param group="InternalFormat"><ptype>GLint</ptype> <name>internalformat</name></param>
-            <param><ptype>GLsizei</ptype> <name>width</name></param>
-            <param><ptype>GLsizei</ptype> <name>height</name></param>
-            <param><ptype>GLint</ptype> <name>border</name></param>
-            <param group="PixelFormat"><ptype>GLenum</ptype> <name>format</name></param>
-            <param group="PixelType"><ptype>GLenum</ptype> <name>type</name></param>
-            <param len="COMPSIZE(format,type,width,height)">const <ptype>GLfloat</ptype> *<name>pixels</name></param>
-            <glx type="render" opcode="110"/>
-            <glx type="render" opcode="329" name="glTexImage2DPBO" comment="PBO protocol"/>
-        </command>
-        <command>
-            <!-- jagex binding -->
-            <proto>void <name>glTexImage2Di</name></proto>
-            <param group="TextureTarget"><ptype>GLenum</ptype> <name>target</name></param>
-            <param><ptype>GLint</ptype> <name>level</name></param>
-            <param group="InternalFormat"><ptype>GLint</ptype> <name>internalformat</name></param>
-            <param><ptype>GLsizei</ptype> <name>width</name></param>
-            <param><ptype>GLsizei</ptype> <name>height</name></param>
-            <param><ptype>GLint</ptype> <name>border</name></param>
-            <param group="PixelFormat"><ptype>GLenum</ptype> <name>format</name></param>
-            <param group="PixelType"><ptype>GLenum</ptype> <name>type</name></param>
-            <param len="COMPSIZE(format,type,width,height)">const <ptype>GLint</ptype> *<name>pixels</name></param>
-            <glx type="render" opcode="110"/>
-            <glx type="render" opcode="329" name="glTexImage2DPBO" comment="PBO protocol"/>
-        </command>
-        <command>
-            <!-- jagex binding -->
-            <proto>void <name>glTexImage2Dub</name></proto>
-            <param group="TextureTarget"><ptype>GLenum</ptype> <name>target</name></param>
-            <param><ptype>GLint</ptype> <name>level</name></param>
-            <param group="InternalFormat"><ptype>GLint</ptype> <name>internalformat</name></param>
-            <param><ptype>GLsizei</ptype> <name>width</name></param>
-            <param><ptype>GLsizei</ptype> <name>height</name></param>
-            <param><ptype>GLint</ptype> <name>border</name></param>
-            <param group="PixelFormat"><ptype>GLenum</ptype> <name>format</name></param>
-            <param group="PixelType"><ptype>GLenum</ptype> <name>type</name></param>
-            <param len="COMPSIZE(format,type,width,height)">const <ptype>GLbyte</ptype> *<name>pixels</name></param>
             <glx type="render" opcode="110"/>
             <glx type="render" opcode="329" name="glTexImage2DPBO" comment="PBO protocol"/>
         </command>
@@ -29117,22 +28989,6 @@ typedef unsigned int GLhandleARB;
             <param group="PixelFormat"><ptype>GLenum</ptype> <name>format</name></param>
             <param group="PixelType"><ptype>GLenum</ptype> <name>type</name></param>
             <param len="COMPSIZE(format,type,width,height,depth)">const void *<name>pixels</name></param>
-            <glx type="render" opcode="4114"/>
-            <glx type="render" opcode="330" name="glTexImage3DPBO" comment="PBO protocol"/>
-        </command>
-        <command>
-            <!-- jagex binding -->
-            <proto>void <name>glTexImage3Dub</name></proto>
-            <param group="TextureTarget"><ptype>GLenum</ptype> <name>target</name></param>
-            <param><ptype>GLint</ptype> <name>level</name></param>
-            <param group="InternalFormat"><ptype>GLint</ptype> <name>internalformat</name></param>
-            <param><ptype>GLsizei</ptype> <name>width</name></param>
-            <param><ptype>GLsizei</ptype> <name>height</name></param>
-            <param><ptype>GLsizei</ptype> <name>depth</name></param>
-            <param><ptype>GLint</ptype> <name>border</name></param>
-            <param group="PixelFormat"><ptype>GLenum</ptype> <name>format</name></param>
-            <param group="PixelType"><ptype>GLenum</ptype> <name>type</name></param>
-            <param len="COMPSIZE(format,type,width,height,depth)">const <ptype>GLbyte</ptype> *<name>pixels</name></param>
             <glx type="render" opcode="4114"/>
             <glx type="render" opcode="330" name="glTexImage3DPBO" comment="PBO protocol"/>
         </command>
@@ -29503,51 +29359,6 @@ typedef unsigned int GLhandleARB;
             <param group="PixelFormat"><ptype>GLenum</ptype> <name>format</name></param>
             <param group="PixelType"><ptype>GLenum</ptype> <name>type</name></param>
             <param len="COMPSIZE(format,type,width,height)">const void *<name>pixels</name></param>
-            <glx type="render" opcode="4100"/>
-            <glx type="render" opcode="332" name="glTexSubImage2DPBO" comment="PBO protocol"/>
-        </command>
-        <command>
-            <!-- jagex binding -->
-            <proto>void <name>glTexSubImage2Df</name></proto>
-            <param group="TextureTarget"><ptype>GLenum</ptype> <name>target</name></param>
-            <param group="CheckedInt32"><ptype>GLint</ptype> <name>level</name></param>
-            <param group="CheckedInt32"><ptype>GLint</ptype> <name>xoffset</name></param>
-            <param group="CheckedInt32"><ptype>GLint</ptype> <name>yoffset</name></param>
-            <param><ptype>GLsizei</ptype> <name>width</name></param>
-            <param><ptype>GLsizei</ptype> <name>height</name></param>
-            <param group="PixelFormat"><ptype>GLenum</ptype> <name>format</name></param>
-            <param group="PixelType"><ptype>GLenum</ptype> <name>type</name></param>
-            <param len="COMPSIZE(format,type,width,height)">const <ptype>GLfloat</ptype> *<name>pixels</name></param>
-            <glx type="render" opcode="4100"/>
-            <glx type="render" opcode="332" name="glTexSubImage2DPBO" comment="PBO protocol"/>
-        </command>
-        <command>
-            <!-- jagex binding -->
-            <proto>void <name>glTexSubImage2Di</name></proto>
-            <param group="TextureTarget"><ptype>GLenum</ptype> <name>target</name></param>
-            <param group="CheckedInt32"><ptype>GLint</ptype> <name>level</name></param>
-            <param group="CheckedInt32"><ptype>GLint</ptype> <name>xoffset</name></param>
-            <param group="CheckedInt32"><ptype>GLint</ptype> <name>yoffset</name></param>
-            <param><ptype>GLsizei</ptype> <name>width</name></param>
-            <param><ptype>GLsizei</ptype> <name>height</name></param>
-            <param group="PixelFormat"><ptype>GLenum</ptype> <name>format</name></param>
-            <param group="PixelType"><ptype>GLenum</ptype> <name>type</name></param>
-            <param len="COMPSIZE(format,type,width,height)">const <ptype>GLint</ptype> *<name>pixels</name></param>
-            <glx type="render" opcode="4100"/>
-            <glx type="render" opcode="332" name="glTexSubImage2DPBO" comment="PBO protocol"/>
-        </command>
-        <command>
-            <!-- jagex binding -->
-            <proto>void <name>glTexSubImage2Dub</name></proto>
-            <param group="TextureTarget"><ptype>GLenum</ptype> <name>target</name></param>
-            <param group="CheckedInt32"><ptype>GLint</ptype> <name>level</name></param>
-            <param group="CheckedInt32"><ptype>GLint</ptype> <name>xoffset</name></param>
-            <param group="CheckedInt32"><ptype>GLint</ptype> <name>yoffset</name></param>
-            <param><ptype>GLsizei</ptype> <name>width</name></param>
-            <param><ptype>GLsizei</ptype> <name>height</name></param>
-            <param group="PixelFormat"><ptype>GLenum</ptype> <name>format</name></param>
-            <param group="PixelType"><ptype>GLenum</ptype> <name>type</name></param>
-            <param len="COMPSIZE(format,type,width,height)">const <ptype>GLbyte</ptype> *<name>pixels</name></param>
             <glx type="render" opcode="4100"/>
             <glx type="render" opcode="332" name="glTexSubImage2DPBO" comment="PBO protocol"/>
         </command>
