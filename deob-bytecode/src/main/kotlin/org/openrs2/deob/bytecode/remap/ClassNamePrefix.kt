@@ -37,6 +37,32 @@ public class ClassNamePrefixRemapper(vararg libraries: Library) : ExtendedRemapp
     }
 }
 
+public class DefaultPackagePrefixRemapper(packageName: String, vararg libraries: Library) : ExtendedRemapper() {
+    private val mapping = mutableMapOf<String, String>()
+
+    init {
+        for (library in libraries) {
+            for (clazz in library) {
+                // since the class was already mapped as library!class we need to do 2 things
+                // 1. split the library and class name
+                // 2. if there is no package name (default package) we add one for com/jagex/ before the class name
+                // so the end result is library!packageName/class
+                val (libraryName, className) = clazz.name.splitAtLibraryBoundary()
+                val mappedName = if (className.contains('/')) {
+                    clazz.name
+                } else {
+                    "$libraryName!${packageName}/$className"
+                }
+                mapping[clazz.name] = mappedName
+            }
+        }
+    }
+
+    override fun map(internalName: String): String {
+        return mapping.getOrDefault(internalName, internalName)
+    }
+}
+
 public object StripClassNamePrefixRemapper : ExtendedRemapper() {
     override fun map(internalName: String): String {
         return internalName.substring(internalName.indexOf('!') + 1)

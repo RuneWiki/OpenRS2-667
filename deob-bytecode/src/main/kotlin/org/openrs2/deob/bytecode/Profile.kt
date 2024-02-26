@@ -22,7 +22,8 @@ public class Profile(
         public val file: String?,
         public val requires: Set<String>?,
         public val signedMove: Set<String>?,
-        public val move: Set<String>?
+        public val move: Set<String>?,
+        public val defaultPackage: String?
     )
 
     public class DependencyProfile(
