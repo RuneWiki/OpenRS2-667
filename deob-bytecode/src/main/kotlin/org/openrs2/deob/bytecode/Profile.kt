@@ -12,9 +12,14 @@ public class Profile(
     public val entryPoints: GlobMemberFilter,
     public val scrambledLibraries: Set<String>,
     public val maxObfuscatedNameLen: Int,
+    public val skipPreTransformers: Boolean?,
     public val preTransformers: List<String>,
+    public val skipRemapping: Boolean?,
+    public val skipTransformers: Boolean?,
     public val transformers: List<String>,
+    public val skipPatches: Boolean?,
     public val patches: List<String>,
+    public val skipSourceTransformers: Boolean?,
     public val sourceTransformers: List<String>
 ) {
     public class LibraryProfile(

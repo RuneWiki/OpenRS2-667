@@ -81,17 +81,19 @@ public class BytecodeDeobfuscator @Inject constructor(
             SignedClassUtils.move(loaderLib, clientLib, library)
         }
 
-        for (library in libraries) {
-            val conf = profile.libraries[library.name]!!
-            if (conf.move.isNullOrEmpty()) {
-                continue
-            }
+        if (profile.skipRemapping != true) {
+            for (library in libraries) {
+                val conf = profile.libraries[library.name]!!
+                if (conf.move.isNullOrEmpty()) {
+                    continue
+                }
 
-            for (move in conf.move) {
-                val other = libraries.find { it.name == move.substringBefore('!') }!!
-                val clazz = move.substringAfter('!')
+                for (move in conf.move) {
+                    val other = libraries.find { it.name == move.substringBefore('!') }!!
+                    val clazz = move.substringAfter('!')
 
-                library.add(other.remove(clazz)!!)
+                    library.add(other.remove(clazz)!!)
+                }
             }
         }
 
@@ -146,21 +148,29 @@ public class BytecodeDeobfuscator @Inject constructor(
         )
 
         // deobfuscate
-        logger.info { "Transforming" }
-        for (transformer in preTransformers) {
-            logger.info { "Running pre-remap transformer ${transformer.javaClass.simpleName}" }
-            transformer.transform(classPath)
+        if (profile.skipTransformers != true) {
+            logger.info { "Transforming" }
+            for (transformer in preTransformers) {
+                logger.info { "Running pre-remap transformer ${transformer.javaClass.simpleName}" }
+                transformer.transform(classPath)
+            }
         }
 
-        logger.info { "Remapping libraries" }
-        allTransformersByName["Remap"]!!.transform(classPath)
+        if (profile.skipRemapping != true) {
+            logger.info { "Remapping libraries" }
+            allTransformersByName["Remap"]!!.transform(classPath)
+        }
 
-        logger.info { "Patching libraries" }
-        allTransformersByName["Patcher"]!!.transform(classPath)
+        if (profile.skipPatches != true) {
+            logger.info { "Patching libraries" }
+            allTransformersByName["Patcher"]!!.transform(classPath)
+        }
 
-        for (transformer in transformers) {
-            logger.info { "Running transformer ${transformer.javaClass.simpleName}" }
-            transformer.transform(classPath)
+        if (profile.skipTransformers != true) {
+            for (transformer in transformers) {
+                logger.info { "Running transformer ${transformer.javaClass.simpleName}" }
+                transformer.transform(classPath)
+            }
         }
 
         // strip class name prefixes
