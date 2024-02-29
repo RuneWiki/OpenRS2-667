@@ -5,6 +5,7 @@ import org.objectweb.asm.Type
 import org.objectweb.asm.tree.AnnotationNode
 import org.objectweb.asm.tree.ClassNode
 import org.objectweb.asm.tree.FieldNode
+import org.objectweb.asm.tree.LineNumberNode
 import org.objectweb.asm.tree.MethodNode
 import org.openrs2.asm.classpath.ClassPath
 import org.openrs2.asm.classpath.Library
@@ -32,7 +33,7 @@ public class OriginalNameTransformer : Transformer() {
         if (field.invisibleAnnotations == null) {
             field.invisibleAnnotations = mutableListOf()
         }
-        field.invisibleAnnotations.add(createMemberAnnotation(clazz.name, field.name, field.desc))
+        field.invisibleAnnotations.add(createMemberAnnotation(clazz.name, field.name, field.desc, null))
         return false
     }
 
@@ -49,7 +50,8 @@ public class OriginalNameTransformer : Transformer() {
         if (method.invisibleAnnotations == null) {
             method.invisibleAnnotations = mutableListOf()
         }
-        method.invisibleAnnotations.add(createMemberAnnotation(clazz.name, method.name, method.desc))
+        val firstLine = method.instructions.firstOrNull { it is LineNumberNode } as LineNumberNode?
+        method.invisibleAnnotations.add(createMemberAnnotation(clazz.name, method.name, method.desc, firstLine?.line))
 
         val args = Type.getArgumentTypes(method.desc).size
         if (method.invisibleParameterAnnotations == null) {
@@ -74,13 +76,22 @@ public class OriginalNameTransformer : Transformer() {
             return annotation
         }
 
-        private fun createMemberAnnotation(owner: String, name: String, desc: String): AnnotationNode {
+        private fun createMemberAnnotation(owner: String, name: String, desc: String, line: Int?): AnnotationNode {
             val annotation = AnnotationNode(Type.getDescriptor(OriginalMember::class.java))
-            annotation.values = listOf(
-                "owner", owner,
-                "name", name,
-                "descriptor", desc
-            )
+            if (line != null) {
+                annotation.values = listOf(
+                    "owner", owner,
+                    "name", name,
+                    "descriptor", desc,
+                    "line", line
+                )
+            } else {
+                annotation.values = listOf(
+                    "owner", owner,
+                    "name", name,
+                    "descriptor", desc
+                )
+            }
             return annotation
         }
 
