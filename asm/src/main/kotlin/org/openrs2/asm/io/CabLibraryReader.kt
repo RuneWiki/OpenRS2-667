@@ -22,7 +22,7 @@ public object CabLibraryReader : LibraryReader {
                     if (entry.name.endsWith(CLASS_SUFFIX)) {
                         val clazz = ClassNode()
                         val reader = ClassReader(tempOutput.toByteArray())
-                        reader.accept(JsrInliner(clazz), ClassReader.SKIP_DEBUG or ClassReader.SKIP_FRAMES)
+                        reader.accept(JsrInliner(clazz), ClassReader.SKIP_FRAMES)
 
                         classes += clazz
                     }

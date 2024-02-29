@@ -51,7 +51,7 @@ public class DefaultPackagePrefixRemapper(packageName: String, vararg libraries:
                 val mappedName = if (className.contains('/')) {
                     clazz.name
                 } else {
-                    "$libraryName!${packageName}/$className"
+                    "$libraryName!$packageName/$className"
                 }
                 mapping[clazz.name] = mappedName
             }

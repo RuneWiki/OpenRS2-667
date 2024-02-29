@@ -20,6 +20,7 @@ import org.openrs2.deob.bytecode.transform.FinalClassTransformer
 import org.openrs2.deob.bytecode.transform.FinalFieldTransformer
 import org.openrs2.deob.bytecode.transform.FinalMethodTransformer
 import org.openrs2.deob.bytecode.transform.InvokeSpecialTransformer
+import org.openrs2.deob.bytecode.transform.LineNumberTableTransformer
 import org.openrs2.deob.bytecode.transform.MethodOrderTransformer
 import org.openrs2.deob.bytecode.transform.MonitorTransformer
 import org.openrs2.deob.bytecode.transform.MultipleAssignmentTransformer
@@ -66,6 +67,7 @@ public object BytecodeDeobfuscatorModule : AbstractModule() {
         binder.addBinding().to(FinalFieldTransformer::class.java)
         binder.addBinding().to(FinalMethodTransformer::class.java)
         binder.addBinding().to(InvokeSpecialTransformer::class.java)
+        binder.addBinding().to(LineNumberTableTransformer::class.java)
         binder.addBinding().to(MethodOrderTransformer::class.java)
         binder.addBinding().to(MonitorTransformer::class.java)
         binder.addBinding().to(MultipleAssignmentTransformer::class.java)

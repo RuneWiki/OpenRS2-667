@@ -3,6 +3,7 @@ package org.openrs2.deob.bytecode.transform
 import jakarta.inject.Singleton
 import org.objectweb.asm.Opcodes
 import org.objectweb.asm.tree.ClassNode
+import org.objectweb.asm.tree.LineNumberNode
 import org.objectweb.asm.tree.MethodNode
 import org.openrs2.asm.classpath.ClassPath
 import org.openrs2.asm.classpath.Library

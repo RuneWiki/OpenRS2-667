@@ -21,7 +21,7 @@ public object JarLibraryReader : LibraryReader {
 
                 val clazz = ClassNode()
                 val reader = ClassReader(jar)
-                reader.accept(JsrInliner(clazz), ClassReader.SKIP_DEBUG or ClassReader.SKIP_FRAMES)
+                reader.accept(JsrInliner(clazz), ClassReader.SKIP_FRAMES)
 
                 classes += clazz
             }
