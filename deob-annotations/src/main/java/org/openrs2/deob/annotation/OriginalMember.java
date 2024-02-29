@@ -8,5 +8,5 @@ public @interface OriginalMember {
 	String owner();
 	String name();
 	String descriptor();
-	int line();
+    int line() default -1;
 }
